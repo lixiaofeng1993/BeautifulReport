@@ -1,0 +1,12 @@
+
+api	原版
+CN	中文  
+EN	英文
+	---界面显示的区别
+
+https://github.com/findyou/HTMLTestRunnerCN/tree/dev
+
+2018.05.05
+	修改页面样式 
+	
+	错误截图未解决
