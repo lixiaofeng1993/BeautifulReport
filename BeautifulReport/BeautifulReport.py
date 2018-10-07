@@ -331,8 +331,13 @@ class ReportTestResult(unittest.TestResult):
         """
         class_name = test.__class__.__qualname__
         method_name = test.__dict__['_testMethodName']
-        # method_doc = test.__dict__['_testMethodDoc']  # 出现dict() -> new empty dictionary dict
-        method_doc = ""
+        method_doc = test.__dict__[
+            '_testMethodDoc']  # 出现dict() -> new empty dictionary dict ddt version 1.2.0 问题，降为1.1.2 version 即可
+        try:
+            if isinstance(eval(method_doc), dict):
+                method_doc = eval(method_doc)['name']  # ddt 从excel中取name 列为用例描述
+        except Exception as e:
+            method_doc = "接口测试用例"
         return class_name, method_name, method_doc
 
 
