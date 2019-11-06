@@ -337,12 +337,12 @@ class ReportTestResult(unittest.TestResult):
             if isinstance(eval(method_doc), dict):
                 method_doc = eval(method_doc)['name']  # ddt 从excel中取name 列为用例描述
         except Exception as e:
-            method_doc = "接口测试用例"
+            method_doc = method_doc
         return class_name, method_name, method_doc
 
 
 class BeautifulReport(ReportTestResult, PATH):
-    img_path = 'img/' if platform.system() != 'Windows' else 'img\\'
+    img_path = 'img/' if platform.system() != 'Windows' else '\\img'
 
     def __init__(self, suites):
         super(BeautifulReport, self).__init__(suites)
@@ -402,8 +402,7 @@ class BeautifulReport(ReportTestResult, PATH):
         :param file_name: 用户在装饰器中传递进来的问价匿名
         :return:
         """
-        pattern = '/' if platform != 'Windows' else '\\'
-
+        pattern = '/' if platform.system() != 'Windows' else '\\'
         with open(img_path + pattern + file_name, 'rb') as file:
             data = file.read()
         return base64.b64encode(data).decode()
